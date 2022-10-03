@@ -1,5 +1,5 @@
 {
-  "command": "--no-read-only --outdir /tmp /src/ssips_L1b_workflow.cwl /src/ssips_L1b_workflow.yml",
+  "command": "/some/location/run_cwl_workflow.sh unity-sps-workflows/sounder_sips/ssips_L1b_workflow.cwl",
   "recommended-queues": [
     "verdi-job_worker"
   ],
@@ -7,10 +7,6 @@
   "soft_time_limit": 900,
   "time_limit": 960,
   "imported_worker_files": {
-    "/tmp/unity-sps-workflows/sounder_sips": [
-      "/src",
-      "rw"
-    ],
     "/static-data": [
       "/static-data",
       "rw"
