@@ -15,10 +15,5 @@ RUN chmod +x run_cwl_workflow.sh
 RUN cp ../create_cwl_yml.sh .
 RUN chmod +x create_cwl_yml.sh
 
-# copy in code needed for algorithm
-RUN git clone ${REPO_URL_WITH_TOKEN} && \
-   cd ${REPO_NAME} && \
-   git checkout ${BRANCH}
-
 # TODO: change entrypoint, since we will not be running a bash script
 ENTRYPOINT ["/home/ops/verdi/bin/cwl-runner"]
