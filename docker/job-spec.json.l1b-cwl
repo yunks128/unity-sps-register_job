@@ -1,5 +1,5 @@
 {
-  "command": "/some/location/run_cwl_workflow.sh https://github.com/unity-sds/unity-sps-workflows/blob/main/sounder_sips/ssips_L1b_workflow.cwl",
+  "command": "/tmp/run_cwl_workflow.sh https://github.com/unity-sds/unity-sps-workflows/blob/main/sounder_sips/ssips_L1b_workflow.cwl",
   "recommended-queues": [
     "verdi-job_worker"
   ],
