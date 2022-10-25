@@ -1,14 +1,18 @@
 #!/usr/bin/env python
 import json
 import yaml
+import os
 
 def get_inputs_from_context():
     """
     Parses the _context.json file and returns the user provided inputs
     :return: a dictionary of cwl key and user provided value
     """
-    jc = JobContext("_context.json")
-    job_context = jc.ctx
+    with open("_context.json", 'r') as f:
+        try:
+            job_context = json.loads(f.read())
+        except json.decoder.JSONDecodeError:
+            print('File is empty')
     print(f"job_context: {json.dumps(job_context, indent=2)}")
     workflow_inputs = dict()
     job_params = job_context.get("job_specification").get("params")
@@ -20,7 +24,12 @@ def get_inputs_from_context():
     return workflow_inputs
 
 def get_system_workflow_inputs():
-    return {}
+    # Read in environment variales
+    sys_wfl_inps = dict()
+    sys_wfl_inps["staging_bucket"] = os.environ("STAGING_BUCKET")
+    sys_wfl_inps["client_id"] = os.environ("CLIENT_ID")
+    sys_wfl_inps["dapa_api"] = os.environ("DAPA_API")
+    return sys_wfl_inps
 
 def create_yml():
     workflow_yaml = dict()
@@ -34,8 +43,6 @@ def create_yml():
     with open(r'workflow_yaml.yml', 'w') as file:
         yml_document = yaml.dump(workflow_yaml, file)
     print(yml_document)
-
-
 
 
 if __name__ == "__main__":
