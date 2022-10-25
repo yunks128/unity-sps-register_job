@@ -18,4 +18,4 @@ COPY create_cwl_yml.py .
 RUN chmod +x create_cwl_yml.py
 
 # TODO: change entrypoint, since we will not be running a bash script
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["./run_cwl_workflow.sh"]
