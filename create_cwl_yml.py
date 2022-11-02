@@ -26,9 +26,9 @@ def get_inputs_from_context():
 def get_system_workflow_inputs():
     # Read in environment variales
     sys_wfl_inps = dict()
-    sys_wfl_inps["staging_bucket"] = os.environ("STAGING_BUCKET")
-    sys_wfl_inps["client_id"] = os.environ("CLIENT_ID")
-    sys_wfl_inps["dapa_api"] = os.environ("DAPA_API")
+    sys_wfl_inps["staging_bucket"] = os.environ["STAGING_BUCKET"]
+    sys_wfl_inps["client_id"] = os.environ["CLIENT_ID"]
+    sys_wfl_inps["dapa_api"] = os.environ["DAPA_API"]
     return sys_wfl_inps
 
 def create_yml():
