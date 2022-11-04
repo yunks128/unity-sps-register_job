@@ -9,7 +9,6 @@ RUN /home/ops/verdi/bin/pip install pyyaml
 
 # TODO: create a location where science code is
 RUN mkdir -p /cwl
-WORKDIR /tmp
 
 # copy in the script that runs cwl workflow
 COPY run_cwl_workflow.sh /cwl
