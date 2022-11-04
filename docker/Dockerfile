@@ -8,7 +8,6 @@ RUN /home/ops/verdi/bin/pip install cwl-runner
 RUN /home/ops/verdi/bin/pip install pyyaml
 
 # TODO: create a location where science code is
-RUN mkdir -p /tmp
 RUN mkdir -p /cwl
 WORKDIR /tmp
 
