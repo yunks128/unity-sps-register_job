@@ -9,13 +9,14 @@ RUN /home/ops/verdi/bin/pip install pyyaml
 
 # TODO: create a location where science code is
 RUN mkdir -p /tmp
+RUN mkdir -p /cwl
 WORKDIR /tmp
 
 # copy in the script that runs cwl workflow
-COPY run_cwl_workflow.sh .
-RUN chmod +x run_cwl_workflow.sh
-COPY create_cwl_yml.py .
-RUN chmod +x create_cwl_yml.py
+COPY run_cwl_workflow.sh /cwl
+RUN chmod +x /cwl/run_cwl_workflow.sh
+COPY create_cwl_yml.py /cwl
+RUN chmod +x /cwl/create_cwl_yml.py
 
 # TODO: change entrypoint, since we will not be running a bash script
-ENTRYPOINT ["./run_cwl_workflow.sh"]
+ENTRYPOINT ["./cwl/run_cwl_workflow.sh"]
