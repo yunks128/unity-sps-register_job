@@ -3,16 +3,17 @@ import json
 import yaml
 import os
 
+
 def get_inputs_from_context():
     """
     Parses the _context.json file and returns the user provided inputs
     :return: a dictionary of cwl key and user provided value
     """
-    with open("_context.json", 'r') as f:
+    with open("_context.json", "r") as f:
         try:
             job_context = json.loads(f.read())
         except json.decoder.JSONDecodeError:
-            print('File is empty')
+            print("File is empty")
     print(f"job_context: {json.dumps(job_context, indent=2)}")
     workflow_inputs = dict()
     job_params = job_context.get("job_specification").get("params")
@@ -21,7 +22,14 @@ def get_inputs_from_context():
         if param.get("destination") == "context":
             workflow_inputs[param.get("name")] = param.get("value")
 
+    # TODO: Remove hardcoded values
+    workflow_inputs["input_collection_id"] = "SNDR_SNPP_ATMS_L1A___1"
+    workflow_inputs["start_datetime"] = "2016-01-14T08:00:00Z"
+    workflow_inputs["stop_datetime"] = "2016-01-14T11:59:59Z"
+    workflow_inputs["output_collection_id"] = "SNDR_SNPP_ATMS_L1B_OUTPUT___1"
+
     return workflow_inputs
+
 
 def get_system_workflow_inputs():
     # Read in environment variales
@@ -30,6 +38,7 @@ def get_system_workflow_inputs():
     sys_wfl_inps["client_id"] = os.environ["CLIENT_ID"]
     sys_wfl_inps["dapa_api"] = os.environ["DAPA_API"]
     return sys_wfl_inps
+
 
 def create_yml():
     workflow_yaml = dict()
@@ -40,7 +49,7 @@ def create_yml():
     sys_wfl_inps = get_system_workflow_inputs()
     workflow_yaml.update(sys_wfl_inps)
     # write out yaml
-    with open(r'workflow_yaml.yml', 'w') as file:
+    with open(r"workflow_yaml.yml", "w") as file:
         yml_document = yaml.dump(workflow_yaml, file)
     print(yml_document)
 
