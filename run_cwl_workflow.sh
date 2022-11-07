@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cwl_workflow_file_url=$0
+cwl_workflow_file_url=$1
 
 # Create yaml file for the run
 python3 /cwl/create_cwl_yml.py
