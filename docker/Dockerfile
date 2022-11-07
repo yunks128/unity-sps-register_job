@@ -16,5 +16,10 @@ RUN chmod +x /cwl/run_cwl_workflow.sh
 COPY create_cwl_yml.py /cwl
 RUN chmod +x /cwl/create_cwl_yml.py
 
+# Potentially hardcode env variables here or in run_cwl_workflow.sh
+ENV STAGING_BUCKET "uds-dev-cumulus-staging"
+ENV CLIENT_ID "71g0c73jl77gsqhtlfg2ht388c"
+ENV DAPA_API "https://1gp9st60gd.execute-api.us-west-2.amazonaws.com/dev"
+
 # TODO: change entrypoint, since we will not be running a bash script
 ENTRYPOINT ["/cwl/run_cwl_workflow.sh"]
