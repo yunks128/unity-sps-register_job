@@ -21,13 +21,6 @@ def get_inputs_from_context():
     for param in job_params:
         if param.get("destination") == "context":
             workflow_inputs[param.get("name")] = param.get("value")
-
-    # TODO: Remove hardcoded values
-    workflow_inputs["input_collection_id"] = "SNDR_SNPP_ATMS_L1A___1"
-    workflow_inputs["start_datetime"] = "2016-01-14T08:00:00Z"
-    workflow_inputs["stop_datetime"] = "2016-01-14T11:59:59Z"
-    workflow_inputs["output_collection_id"] = "SNDR_SNPP_ATMS_L1B_OUTPUT___1"
-
     return workflow_inputs
 
 
@@ -50,8 +43,8 @@ def create_yml():
     workflow_yaml.update(sys_wfl_inps)
     # write out yaml
     with open(r"workflow_yaml.yml", "w") as file:
-        yml_document = yaml.dump(workflow_yaml, file)
-    print(yml_document)
+        yaml.dump(workflow_yaml, file)
+    print(yaml.dump(workflow_yaml))
 
 
 if __name__ == "__main__":
