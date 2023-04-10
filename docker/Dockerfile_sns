@@ -1,0 +1,8 @@
+FROM python:3.9
+
+COPY publish_sns.py publish_sns.py
+COPY requirements.txt requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD ["python", "publish_sns.py", "/data/job_data.json"]
