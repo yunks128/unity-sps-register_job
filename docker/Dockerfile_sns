@@ -5,9 +5,4 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY publish_sns.py /usr/bin/publish_sns.py
 
-
-# ENV ACCESS_KEY=ASIAWHJXNLD7KRJIXW7P
-# ENV SECRET_KEY=WN/rd3XLlgfbhyf3hPbyx9ERYYkZISQb4lmzUdqa
-# ENV SESSION_TOKEN=FwoGZXIvYXdzENf//////////wEaDFOXPvionipW2lT+xiKsAeccFXknkCZqnSGlAh/lXczbyRouECFSYnAdEpQimHLxHKredXuVjnPWoQcHwjDUh7YOaRJTiRZv0r+u37pUuMhDk1uDkF2yhrhcUquptc4feGeWwEgvbusKjVXX7JSKt/YthywsetMKf+YvTTspnz3EoF3Y/hBEnN2lxTpDDH7RuYd4MMW4YEglwTXC2XFNkrrvNH3Rw0Np3WnH537p+wXJmn1h14LX00DEH1gomJzXoQYyLdAQ3FMtbUPWJ42sCCq8vOtlkuW4/vr7pc49VCXqUrfefZd60DAXfcxIue5mGg==
-
 #CMD ["python", "/usr/bin/publish_sns.py", "/data/job_data.json", "--aws_auth_method", "keys"]
