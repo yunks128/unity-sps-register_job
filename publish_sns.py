@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import boto3
 import argparse
 import yaml
@@ -14,20 +15,23 @@ def main():
     args = parse_args()
     with open(args.job_data, mode='r') as f:
         message = f.read()
+
     if args.aws_auth_method == "keys":
-        sts_client = boto3.client('sts',
+        sts_client = boto3.client('sts', region_name='us-west-2',
                               aws_access_key_id = os.getenv("ACCESS_KEY"),
                               aws_secret_access_key = os.getenv("SECRET_KEY"),
                               aws_session_token = os.getenv("SESSION_TOKEN"))
         print(sts_client.get_caller_identity())
-        client = boto3.client('sns',
+        client = boto3.client('sns', region_name='us-west-2',
                               aws_access_key_id = os.getenv("ACCESS_KEY"),
                               aws_secret_access_key = os.getenv("SECRET_KEY"),
                               aws_session_token = os.getenv("SESSION_TOKEN"))
+
     elif args.aws_auth_method == "iam":
-        sts_client = boto3.client('sts')
+        sts_client = boto3.client('sts', region_name='us-west-2')
         print(sts_client.get_caller_identity())
-        client = boto3.client('sns')
+        client = boto3.client('sns', region_name='us-west-2')
+
     else:
         print(f"Invalid aws_auth_method: {args.aws_auth_method}")
         print(f"Supported methods: iam, keys")

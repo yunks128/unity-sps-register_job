@@ -4,6 +4,13 @@ USER root
 
 RUN /home/ops/verdi/bin/pip install cwl-runner
 
+COPY requirements.txt requirements.txt
+
+RUN /home/ops/verdi/bin/pip install --no-cache-dir -r requirements.txt
+COPY publish_sns.py /home/ops/verdi/bin/publish_sns.py
+COPY pulbish_job_status.cwl /cwl/pulbish_job_status.cwl
+COPY pulbish_job_status.yaml /cwl/pulbish_job_status.yaml
+
 # Need pyyaml for writing workflow yaml
 RUN /home/ops/verdi/bin/pip install pyyaml
 
