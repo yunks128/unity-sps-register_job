@@ -7,15 +7,21 @@ RUN /home/ops/verdi/bin/pip install cwl-runner
 COPY requirements.txt requirements.txt
 
 RUN /home/ops/verdi/bin/pip install --no-cache-dir -r requirements.txt
-COPY publish_sns.py /home/ops/verdi/bin/publish_sns.py
-COPY publish_job_status.cwl /cwl/pulbish_job_status.cwl
-COPY publish_job_status.yaml /cwl/pulbish_job_status.yaml
 
 # Need pyyaml for writing workflow yaml
 RUN /home/ops/verdi/bin/pip install pyyaml
 
 # TODO: create a location where science code is
 RUN mkdir -p /cwl
+
+# copy in job status publisher
+COPY publish_job_status.cwl /cwl/publish_job_status.cwl
+RUN chmod +x /cwl/publish_job_status.cwl
+COPY publish_job_status.yml /cwl/publish_job_status.yml
+
+# copy in job data script
+COPY create_job_data.py /cwl/create_job_data.py
+RUN chmod +x /cwl/create_job_data.py
 
 # copy in the script that runs cwl workflow
 COPY run_cwl_workflow.sh /cwl
