@@ -22,6 +22,8 @@ COPY publish_job_status.yml /cwl/publish_job_status.yml
 # copy in job data script
 COPY create_job_data.py /cwl/create_job_data.py
 RUN chmod +x /cwl/create_job_data.py
+COPY publish_sns.py /cwl/publish_sns.py
+RUN chmod +x /cwl/publish_sns.py
 
 # copy in the script that runs cwl workflow
 COPY run_cwl_workflow.sh /cwl

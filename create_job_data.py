@@ -7,7 +7,7 @@ Consumes job _context.json file from verdi directory and produces job_data.json 
 
 JOB_CONTEXT_FILE = "_context.json"
 JOB_ID_FILE = "_job.json"
-JOB_DATA_FILE = "/cwl/job_data.json"
+JOB_DATA_FILE = "job_data.json"
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -33,7 +33,7 @@ def main():
     workflow_outputs = []
     if args.outputs_file:
         with open(args.outputs_file, 'r') as f:
-            workflow_outputs = f.read()
+            workflow_outputs = json.loads(f.read())
     job_data = {
         "id": job_id_json["job_info"]["job_payload"]["payload_task_id"],
         "inputs": workflow_inputs,
