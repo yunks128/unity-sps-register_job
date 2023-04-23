@@ -1,8 +1,11 @@
-FROM python:3.9
+FROM python:latest
 
 COPY requirements.txt requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt
-COPY publish_sns.py /usr/bin/publish_sns.py
+
+WORKDIR /usr/app
+COPY publish_sns.py /usr/app/publish_sns.py
 
 #CMD ["python", "/usr/bin/publish_sns.py", "/data/job_data.json", "--aws_auth_method", "keys"]
+ENTRYPOINT ["python"]

@@ -1,6 +1,6 @@
 cwlVersion: v1.2
 class: CommandLineTool
-baseCommand: ["/home/ops/verdi/bin/publish_sns.py"]
+baseCommand: ["/usr/app/publish_sns.py"]
 hints:
     DockerRequirement:
         dockerPull: ghcr.io/unity-sds/unity-sps-prototype/sps-job-publisher:unity-v0.0.1
