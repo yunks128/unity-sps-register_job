@@ -15,9 +15,8 @@ RUN /home/ops/verdi/bin/pip install pyyaml
 RUN mkdir -p /cwl
 
 # copy in job status publisher
-COPY publish_job_status.cwl publish_job_status.cwl
-RUN chmod +x publish_job_status.cwl
-COPY publish_job_status.yml publish_job_status.yml
+COPY publish_job_status.cwl /cwl/publish_job_status.cwl
+RUN chmod +x /cwl/publish_job_status.cwl
 
 # copy in job data script
 COPY create_job_data.py /cwl/create_job_data.py
