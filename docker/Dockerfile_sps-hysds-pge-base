@@ -2,6 +2,9 @@ FROM hysds/pge-base:develop
 
 USER root
 
+# Add /opt/conda/bin to the PATH environment variable
+ENV PATH="/opt/conda/bin:${PATH}"
+
 RUN /home/ops/verdi/bin/pip install cwl-runner
 
 # Need pyyaml for writing workflow yaml
