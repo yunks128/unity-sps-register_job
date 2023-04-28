@@ -5,7 +5,6 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /usr/app
-COPY publish_sns.py /usr/app/publish_sns.py
+COPY publish_job.py /usr/app/publish_job.py
 
-#CMD ["python", "/usr/bin/publish_sns.py", "/data/job_data.json", "--aws_auth_method", "keys"]
 ENTRYPOINT ["python"]
