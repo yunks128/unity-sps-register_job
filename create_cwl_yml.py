@@ -53,7 +53,6 @@ def create_yml():
     workflow_yaml.update(wfl_inps)
     workflow_yaml["job_inputs"] = json.dumps(wfl_inps)
     workflow_yaml["job_id"] = get_job_id_from_context()
-    workflow_yaml["job_status"] = "running"
     # setting other static / env values for workflow run
     sys_wfl_inps = get_system_workflow_inputs()
     workflow_yaml.update(sys_wfl_inps)
