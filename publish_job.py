@@ -63,7 +63,7 @@ def main():
     print(sns_client.publish(
         TopicArn=topic_arn,
         Message=json.dumps(job_data),
-        MessageGroupId="jobupdate"
+        MessageGroupId=args.job_id
     ))
 
 if __name__ == "__main__":
