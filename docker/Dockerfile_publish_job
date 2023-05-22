@@ -1,0 +1,10 @@
+FROM python:latest
+
+COPY requirements.txt requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+WORKDIR /usr/app
+COPY publish_job.py /usr/app/publish_job.py
+
+ENTRYPOINT ["python"]
