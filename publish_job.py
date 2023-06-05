@@ -83,10 +83,7 @@ def main():
         "status": args.job_status,
     }
 
-    if not args.topic_arn:
-        topic_arn = os.getenv("JOBS_DATA_SNS_TOPIC_ARN")
-    else:
-        topic_arn = args.topic_arn
+    topic_arn = args.topic_arn
 
     print(
         sns_client.publish(
