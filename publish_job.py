@@ -32,7 +32,7 @@ def parse_args():
         help="JSON array of WPS-T job output objects associated with job",
     )
     parser.add_argument("--aws_auth_method", type=str, default="iam")
-    parser.add_argument("--topic_arn", type=str, default="")
+    parser.add_argument("--jobs_data_sns_topic_arn", type=str, default="")
 
     return parser.parse_args()
 
@@ -83,7 +83,7 @@ def main():
         "status": args.job_status,
     }
 
-    topic_arn = args.topic_arn
+    topic_arn = args.jobs_data_sns_topic_arn
 
     print(
         sns_client.publish(
