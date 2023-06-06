@@ -1,4 +1,4 @@
-FROM ghcr.io/unity-sds/unity-sps-prototype/sps-hysds-pge-base:develop
+FROM ghcr.io/unity-sds/unity-sps-prototype/sps-hysds-pge-base-develop:develop
 
 USER root
 
