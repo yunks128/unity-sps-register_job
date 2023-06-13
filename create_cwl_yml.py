@@ -23,17 +23,18 @@ def get_inputs_from_context():
             workflow_inputs[param.get("name")] = param.get("value")
     return workflow_inputs
 
+
 def get_job_id_from_context():
     """
     Parses the _job.json file and returns the job id
     :return: string of job id
     """
-    with open("_job.json", 'r') as f:
+    with open("_job.json", "r") as f:
         try:
             job_id_json = json.loads(f.read())
         except json.decoder.JSONDecodeError:
             print("Job file is empty")
-    
+
     return job_id_json["job_info"]["job_payload"]["payload_task_id"]
 
 
@@ -43,6 +44,7 @@ def get_system_workflow_inputs():
     sys_wfl_inps["staging_bucket"] = os.environ["STAGING_BUCKET"]
     sys_wfl_inps["client_id"] = os.environ["CLIENT_ID"]
     sys_wfl_inps["dapa_api"] = os.environ["DAPA_API"]
+    sys_wfl_inps["jobs_data_sns_topic_arn"] = os.environ["JOBS_DATA_SNS_TOPIC_ARN"]
     return sys_wfl_inps
 
 
