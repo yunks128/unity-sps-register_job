@@ -24,12 +24,27 @@ def get_inputs_from_context():
     return workflow_inputs
 
 
+def get_job_id_from_context():
+    """
+    Parses the _job.json file and returns the job id
+    :return: string of job id
+    """
+    with open("_job.json", "r") as f:
+        try:
+            job_id_json = json.loads(f.read())
+        except json.decoder.JSONDecodeError:
+            print("Job file is empty")
+
+    return job_id_json["job_info"]["job_payload"]["payload_task_id"]
+
+
 def get_system_workflow_inputs():
     # Read in environment variales
     sys_wfl_inps = dict()
     sys_wfl_inps["staging_bucket"] = os.environ["STAGING_BUCKET"]
     sys_wfl_inps["client_id"] = os.environ["CLIENT_ID"]
     sys_wfl_inps["dapa_api"] = os.environ["DAPA_API"]
+    sys_wfl_inps["jobs_data_sns_topic_arn"] = os.environ["JOBS_DATA_SNS_TOPIC_ARN"]
     return sys_wfl_inps
 
 
@@ -38,6 +53,8 @@ def create_yml():
     # Reading in job inputs
     wfl_inps = get_inputs_from_context()
     workflow_yaml.update(wfl_inps)
+    workflow_yaml["job_inputs"] = json.dumps(wfl_inps)
+    workflow_yaml["job_id"] = get_job_id_from_context()
     # setting other static / env values for workflow run
     sys_wfl_inps = get_system_workflow_inputs()
     workflow_yaml.update(sys_wfl_inps)
