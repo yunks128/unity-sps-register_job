@@ -16,17 +16,11 @@ def parse_args():
     parser.add_argument(
         "--job_inputs",
         type=str,
-        default="[]",
+        default="{}",
         help="JSON array of WPS-T job input objects associated with job",
     )
     parser.add_argument(
         "--job_outputs",
-        type=str,
-        default="[]",
-        help="JSON array of WPS-T job output objects associated with job",
-    )
-    parser.add_argument(
-        "--tags",
         type=str,
         default="{}",
         help="JSON array of WPS-T job output objects associated with job",
@@ -77,9 +71,8 @@ def main():
     # contstruct final job data json object
     job_data = {
         "id": args.job_id,
-        "inputs": args.job_inputs,
-        "outputs": args.job_outputs,
-        "tags": args.tags,
+        "inputs": json.loads(args.job_inputs),
+        "outputs": json.loads(args.job_outputs),
         "status": args.job_status,
     }
 
