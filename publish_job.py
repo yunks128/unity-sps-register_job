@@ -82,7 +82,7 @@ def main():
     args = parse_args()
 
     # get sts and sns aws clients
-    # sts_client, sns_client = get_sts_and_sns_clients(args.aws_auth_method)
+    sts_client, sns_client = get_sts_and_sns_clients(args.aws_auth_method)
 
     # contstruct final job data json object
     job_data = {"id": args.job_id}
@@ -95,11 +95,11 @@ def main():
     topic_arn = args.jobs_data_sns_topic_arn
     print(job_data)
 
-    # print(
-    #     sns_client.publish(
-    #         TopicArn=topic_arn, Message=json.dumps(job_data), MessageGroupId=args.job_id
-    #     )
-    # )
+    print(
+        sns_client.publish(
+            TopicArn=topic_arn, Message=json.dumps(job_data), MessageGroupId=args.job_id
+        )
+    )
 
 
 if __name__ == "__main__":
