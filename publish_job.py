@@ -12,14 +12,13 @@ def parse_args():
     parser.add_argument("job_id", type=str, help="Job ID (required)")
     parser.add_argument("--update_status", type=str, help="Job status")
     parser.add_argument("--update_results", action='store_true', help="Update results")
+    parser.add_argument("--aws_auth_method", type=str, default="iam")
+    parser.add_argument("--jobs_data_sns_topic_arn", type=str, default="")
 
     args = parser.parse_args()
 
     if not args.update_status and not args.update_results:
         parser.error("Either --update_status or --update_results must be specified.")
-
-    parser.add_argument("--aws_auth_method", type=str, default="iam")
-    parser.add_argument("--jobs_data_sns_topic_arn", type=str, default="")
 
     return parser.parse_args()
 
