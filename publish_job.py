@@ -10,7 +10,7 @@ def parse_args():
 
     parser = argparse.ArgumentParser(description="Update job status and results")
 
-    parser.add_argument("job_id", type=str, help="Job ID of job being executed(required)")
+    parser.add_argument("--job_id", type=str, help="Job ID of job being executed(required)")
     parser.add_argument("--update_status", type=str, help="Job status")
     parser.add_argument("--update_results", action='store_true', help="Update results")
     parser.add_argument("--aws_auth_method", type=str, default="iam")
