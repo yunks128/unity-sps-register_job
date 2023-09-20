@@ -51,13 +51,13 @@ def get_system_workflow_inputs():
 def create_yml():
     workflow_yaml = dict()
     # Reading in job inputs
+    sys_wfl_inps = get_system_workflow_inputs()
     wfl_inps = get_inputs_from_context()
+    workflow_yaml.update(sys_wfl_inps)
     workflow_yaml.update(wfl_inps)
     workflow_yaml["job_inputs"] = json.dumps(wfl_inps)
     workflow_yaml["job_id"] = get_job_id_from_context()
     # setting other static / env values for workflow run
-    sys_wfl_inps = get_system_workflow_inputs()
-    workflow_yaml.update(sys_wfl_inps)
     # write out yaml
     with open(r"workflow_yaml.yml", "w") as file:
         yaml.dump(workflow_yaml, file)
