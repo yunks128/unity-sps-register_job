@@ -41,23 +41,23 @@ def get_job_id_from_context():
 def get_system_workflow_inputs():
     # Read in environment variales
     sys_wfl_inps = dict()
-    sys_wfl_inps["staging_bucket"] = os.environ["STAGING_BUCKET"]
-    sys_wfl_inps["client_id"] = os.environ["CLIENT_ID"]
-    sys_wfl_inps["dapa_api"] = os.environ["DAPA_API"]
-    sys_wfl_inps["jobs_data_sns_topic_arn"] = os.environ["JOBS_DATA_SNS_TOPIC_ARN"]
+    sys_wfl_inps["staging_bucket"] = os.getenv("STAGING_BUCKET", default="")
+    sys_wfl_inps["client_id"] = os.getenv("CLIENT_ID", default="")
+    sys_wfl_inps["dapa_api"] = os.getenv("DAPA_API", default="")
+    sys_wfl_inps["jobs_data_sns_topic_arn"] = os.getenv("JOBS_DATA_SNS_TOPIC_ARN", default="")
     return sys_wfl_inps
 
 
 def create_yml():
     workflow_yaml = dict()
     # Reading in job inputs
+    sys_wfl_inps = get_system_workflow_inputs()
     wfl_inps = get_inputs_from_context()
+    workflow_yaml.update(sys_wfl_inps)
     workflow_yaml.update(wfl_inps)
     workflow_yaml["job_inputs"] = json.dumps(wfl_inps)
     workflow_yaml["job_id"] = get_job_id_from_context()
     # setting other static / env values for workflow run
-    sys_wfl_inps = get_system_workflow_inputs()
-    workflow_yaml.update(sys_wfl_inps)
     # write out yaml
     with open(r"workflow_yaml.yml", "w") as file:
         yaml.dump(workflow_yaml, file)
